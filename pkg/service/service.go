@@ -1,6 +1,6 @@
 package service
 
-import "todo-rest-api/pkg/repository"
+import "github.com/mTeeeur/todo-rest-api/pkg/repository"
 
 type Authorization interface {
 

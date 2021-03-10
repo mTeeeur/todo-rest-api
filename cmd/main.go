@@ -1,12 +1,12 @@
 package main
 
 import (
+	todo_rest_api "github.com/mTeeeur/todo-rest-api"
+	"github.com/mTeeeur/todo-rest-api/pkg/handler"
+	"github.com/mTeeeur/todo-rest-api/pkg/repository"
+	"github.com/mTeeeur/todo-rest-api/pkg/service"
 	"github.com/spf13/viper"
 	"log"
-	todo_rest_api "todo-rest-api"
-	"todo-rest-api/pkg/handler"
-	"todo-rest-api/pkg/repository"
-	"todo-rest-api/pkg/service"
 )
 
 func main() {
