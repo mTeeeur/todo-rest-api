@@ -3,7 +3,6 @@ package handler
 import "github.com/gin-gonic/gin"
 
 type Handler struct {
-
 }
 
 func (h *Handler) Init() *gin.Engine {
@@ -11,27 +10,27 @@ func (h *Handler) Init() *gin.Engine {
 
 	auth := router.Group("/auth")
 	{
-		auth.POST("/login")
-		auth.POST("/register")
+		auth.POST("/login", h.login)
+		auth.POST("/register", h.register)
 	}
 
 	router.Group("/api")
 	{
 		lists := router.Group("/lists")
 		{
-			lists.POST("/")
-			lists.GET("/")
-			lists.GET("/:id")
-			lists.PUT("/:id")
-			lists.DELETE("/:id")
+			lists.POST("/", h.createList)
+			lists.GET("/", h.getAllLists)
+			lists.GET("/:id", h.getListById)
+			lists.PUT("/:id", h.updateList)
+			lists.DELETE("/:id", h.deleteList)
 
 			items := lists.Group("/:id/items")
 			{
-				items.GET("/")
-				items.POST("/")
-				items.POST("/:item_id")
-				items.PUT("/:item_id")
-				items.DELETE("/:item_id")
+				items.POST("/", h.createItem)
+				items.GET("/", h.getAllItems)
+				items.GET("/:item_id", h.getItemById)
+				items.PUT("/:item_id", h.updateItem)
+				items.DELETE("/:item_id", h.removeItem)
 			}
 		}
 	}
