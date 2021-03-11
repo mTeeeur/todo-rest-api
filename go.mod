@@ -8,6 +8,7 @@ require (
 	github.com/gin-gonic/gin v1.6.3 // indirect
 	github.com/golang-migrate/migrate v3.5.4+incompatible // indirect
 	github.com/jmoiron/sqlx v1.3.1 // indirect
+	github.com/joho/godotenv v1.3.0 // indirect
 	github.com/lib/pq v1.10.0 // indirect
 	github.com/spf13/viper v1.7.1 // indirect
 	github.com/xordataexchange/crypt v0.0.3-0.20170626215501-b2862e3d0a77 // indirect
