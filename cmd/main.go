@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	todo_rest_api "github.com/mTeeeur/todo-rest-api"
 	"github.com/mTeeeur/todo-rest-api/pkg/handler"
@@ -8,11 +9,16 @@ import (
 	"github.com/mTeeeur/todo-rest-api/pkg/service"
 	"github.com/spf13/viper"
 	"log"
+	"os"
 )
 
 func main() {
 	if err := initConfig(); err != nil {
 		log.Fatalf("Error while readfing config: %s", err.Error())
+	}
+
+	if err := godotenv.Load(); err != nil {
+		log.Fatalf("Error while readfing env: %s", err.Error())
 	}
 
 	db, err := repository.NewPostgresDB(repository.Config{
@@ -21,7 +27,7 @@ func main() {
 		Username: viper.GetString("db.username"),
 		DBname:   viper.GetString("db.dbname"),
 		SSLMode:  viper.GetString("db.sslmode"),
-		Password: "admin",
+		Password: os.Getenv("DB_PASSWORD"),
 	})
 
 	if err != nil {
