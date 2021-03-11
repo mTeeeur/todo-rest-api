@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "github.com/lib/pq"
 	todo_rest_api "github.com/mTeeeur/todo-rest-api"
 	"github.com/mTeeeur/todo-rest-api/pkg/handler"
 	"github.com/mTeeeur/todo-rest-api/pkg/repository"
@@ -13,7 +14,21 @@ func main() {
 	if err := initConfig(); err != nil {
 		log.Fatalf("Error while readfing config: %s", err.Error())
 	}
-	repos := repository.NewRepository()
+
+	db, err := repository.NewPostgresDB(repository.Config{
+		Host:     "localhost",
+		Port:     "5436",
+		Username: "postgres",
+		Password: "admin",
+		DBname:   "postgres",
+		SSLMode:  "disable",
+	})
+
+	if err != nil {
+		log.Fatalf("Error while opening database connection: %s", err.Error())
+	}
+
+	repos := repository.NewRepository(db)
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 	server := new(todo_rest_api.Server)
