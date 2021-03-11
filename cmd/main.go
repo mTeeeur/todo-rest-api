@@ -1,7 +1,6 @@
 package main
 
 import (
-	_ "github.com/lib/pq"
 	todo_rest_api "github.com/mTeeeur/todo-rest-api"
 	"github.com/mTeeeur/todo-rest-api/pkg/handler"
 	"github.com/mTeeeur/todo-rest-api/pkg/repository"
