@@ -5,6 +5,14 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+const (
+	users      = "users"
+	todoLists  = "todo_lists"
+	usersLists = "users_lists"
+	todpItems  = "todo_items"
+	listsItems = "lists_items"
+)
+
 type Config struct {
 	Host     string
 	Port     string
@@ -13,6 +21,7 @@ type Config struct {
 	DBname   string
 	SSLMode  string
 }
+
 
 func NewPostgresDB(cfg Config) (*sqlx.DB, error) {
 	db, err := sqlx.Open("postgres", fmt.Sprintf("host=%s, port=%s, user=%s, dbname=%s, password=%s, sslmode=%s",
