@@ -7,6 +7,7 @@ import (
 	"github.com/mTeeeur/todo-rest-api/pkg/handler"
 	"github.com/mTeeeur/todo-rest-api/pkg/repository"
 	"github.com/mTeeeur/todo-rest-api/pkg/service"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"log"
 	"os"
@@ -14,11 +15,11 @@ import (
 
 func main() {
 	if err := initConfig(); err != nil {
-		log.Fatalf("Error while readfing config: %s", err.Error())
+		logrus.Fatalf("Error while readfing config: %s", err.Error())
 	}
 
 	if err := godotenv.Load(); err != nil {
-		log.Fatalf("Error while readfing env: %s", err.Error())
+		logrus.Fatalf("Error while readfing env: %s", err.Error())
 	}
 
 	db, err := repository.NewPostgresDB(repository.Config{
