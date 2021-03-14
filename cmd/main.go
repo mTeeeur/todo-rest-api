@@ -13,6 +13,7 @@ import (
 )
 
 func main() {
+	logrus.SetBufferPool(new(logrus.JSONFormatter))
 	if err := initConfig(); err != nil {
 		logrus.Fatalf("Error while readfing config: %s", err.Error())
 	}
