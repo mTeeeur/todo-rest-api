@@ -22,7 +22,7 @@ func (h *Handler) Init() *gin.Engine {
 		auth.POST("/register", h.register)
 	}
 
-	router.Group("/api")
+	router.Group("/api", h.UserIdentify)
 	{
 		lists := router.Group("/lists")
 		{

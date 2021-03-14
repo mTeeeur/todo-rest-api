@@ -2,6 +2,7 @@ package service
 
 import (
 	"crypto/sha1"
+	"errors"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	todo_rest_api "github.com/mTeeeur/todo-rest-api"
@@ -56,4 +57,25 @@ func (s *AuthService) GenerateToken(username, password string) (string, error) {
 	})
 
 	return token.SignedString([]byte(loginKey))
+}
+func (s *AuthService) ParseToken(token string) (int, error) {
+	tkn, err := jwt.ParseWithClaims(token, &tokenClaims{}, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, errors.New("invalid login method")
+		}
+
+		return []byte(loginKey), nil
+	})
+
+	if err != nil {
+		return 0, err
+	}
+
+	claims, ok := tkn.Claims.(*tokenClaims)
+
+	if !ok {
+		return 0, errors.New("invalid token")
+	}
+
+	return claims.UserId, nil
 }
