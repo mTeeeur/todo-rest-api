@@ -9,7 +9,6 @@ import (
 	"github.com/mTeeeur/todo-rest-api/pkg/service"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"log"
 	"os"
 )
 
@@ -32,7 +31,7 @@ func main() {
 	})
 
 	if err != nil {
-		log.Fatalf("Error while opening database connection: %s", err.Error())
+		logrus.Fatalf("Error while opening database connection: %s", err.Error())
 	}
 
 	repos := repository.NewRepository(db)
@@ -41,7 +40,7 @@ func main() {
 	server := new(todo_rest_api.Server)
 
 	if err := server.Run(viper.GetString("port"), handlers.Init()); err != nil {
-		log.Fatalf("Error: %s", err.Error())
+		logrus.Fatalf("Error: %s", err.Error())
 	}
 }
 
