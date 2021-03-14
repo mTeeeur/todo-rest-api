@@ -1,9 +1,12 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	"github.com/jmoiron/sqlx"
+	todo_rest_api "github.com/mTeeeur/todo-rest-api"
+)
 
 type Authorization interface {
-
+	CreateUser(user todo_rest_api.User) (int, error)
 }
 
 type TodoList interface {

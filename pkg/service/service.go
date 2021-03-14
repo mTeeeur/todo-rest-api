@@ -1,9 +1,12 @@
 package service
 
-import "github.com/mTeeeur/todo-rest-api/pkg/repository"
+import (
+	todo_rest_api "github.com/mTeeeur/todo-rest-api"
+	"github.com/mTeeeur/todo-rest-api/pkg/repository"
+)
 
 type Authorization interface {
-
+	CreateUser(user todo_rest_api.User) (int, error)
 }
 
 type TodoList interface {
